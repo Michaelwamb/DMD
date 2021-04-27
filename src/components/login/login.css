@@ -1,0 +1,154 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+
+    background-color: #30B364;
+    color: white;
+}
+
+#txtsenha, #txt-email {
+    margin-right: 41vh;
+    margin-top: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: black;
+}
+#txtsenha {
+    bottom: 20px;
+}
+ 
+#txt-email {
+    padding-bottom: 5px;
+}
+
+.login-logo img {
+    width: 500px;
+    height: 270px;
+}
+
+.login-right { 
+    background-color: #F7F8FC;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    padding: 20px;
+    width: 450px;
+    height: 500px;
+    box-shadow: -5px 7px 10px #0000006b;;
+}
+
+.body-login {
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    height: 300px;
+}
+
+.title-header {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #0000002e;
+}
+
+
+.login-right h1 {
+    font-size: 35px;
+    color: #30B364;
+    text-transform: none;
+}
+
+.login-loginInputEmail {
+    display: flex;
+    align-items: center;
+    color: gray;
+    background-color: #ffffff;
+    border-radius: 7px;
+    padding: 3px;
+    width: 100%;
+    height: 60px;
+    border: 1px solid #0000001f;
+    margin-bottom: 20px;
+}
+
+.login-loginInputEmail svg {
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+.login-loginInputEmail input {
+    width: 100%;
+    outline-width: 0;
+    color: black;
+    border: none;
+    font-size: 17px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.login-loginInputPassword {
+    display: flex;
+    align-items: center;
+    color: gray;
+    background-color: #ffffff;
+    padding: 3px;
+    margin: 5px;
+    width: 100%;
+    height: 60px;
+    border-radius: 7px;
+    border: 1px solid #0000001f;
+}
+
+.login-loginInputPassword svg {
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+.login-loginInputPassword input {
+    width: 100%;
+    outline-width: 0;
+    color:  black;
+    border: none;
+    font-size: 17px;
+    margin-left: 12px;
+    margin-right: 10px;
+}
+
+.login-right button {
+    width: 100%;
+    background-color: #37C56F;
+    color: #EFF2F5;
+    font-weight: 800;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-top: 25px;
+    border: none;
+
+    outline-width: 0;
+}
+
+.login-right button:hover {
+    background-color: #30b364;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.login-eye {
+    align-items: center;
+    justify-content: center;
+    font-size: 30;
+    cursor: pointer;
+    margin-right: 10px;
+}

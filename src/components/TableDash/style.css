@@ -1,0 +1,42 @@
+.table-dash td, .table-dash th {
+    border: none ;
+}
+
+.table-dash {
+    padding: 0px 20px 0px 20px;
+}
+
+tbody {
+    border: none;
+    background-color: white;
+}
+
+table {
+    border:none;
+    background-color: transparent;
+}
+
+.table-dash thead {
+    background-color: #E9EAF3;
+}
+
+.table-dash th {
+    color: #969CB2;
+}
+
+.td-name {
+    border-radius: 10px 0px 0px 10px;
+    border-bottom: 3px solid #E9EAF3 !important;
+}
+
+.border-bottom {
+    border-bottom: 3px solid #E9EAF3 !important;
+}
+
+.radius {
+    border-radius: 10px 0px 0px 10px;
+}
+
+.radius2 {
+    border-radius: 0px 10px 10px 0px;
+}
