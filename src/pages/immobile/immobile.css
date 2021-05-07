@@ -2,9 +2,38 @@ Immobile {
     background-color: black;
 }
 
-.date-form {
+/* .date-form {
     height: 41px !important;
     padding: 0px 5px !important;
+} */
+
+.date-picker .MuiInput-underline:before {
+    content: inherit !important;
+}
+
+.date-picker .MuiInput-root {
+    width: 100% !important;
+    position: inherit !important;
+}
+
+.date-picker .MuiInputBase-input {
+    padding: 0 !important;
+    position: inherit !important;
+}
+
+.date-form {
+    border: 1px solid rgba(191, 191, 191, 0.295) !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    padding: 0 !important;
+    position: inherit !important;
+    min-width: 0 !important;
+    flex-direction: inherit !important;
+    vertical-align: top !important;
+    border-radius: 5px !important;
+    background: white !important;
+    padding: 5px !important;
+    
 }
 
 .id-immobile {
@@ -468,6 +497,14 @@ form.filter-form {
     font-weight: bold;
 }
 
+.btn-att {
+    font-weight: bold !important;
+}
+
+.btnModalImmobile {
+    height: 50px !important;
+}
+
 .btn-secondary {
     margin-right: 8px;
     width: 80px;
@@ -536,7 +573,7 @@ form.form-modal {
 }
 
 .immobile-box h3 {
-    font-family: cursive;
+    font-family: 'poppins', sans-serif;
     font-style: normal;
     letter-spacing: 0em;
     text-align: left;
@@ -583,3 +620,46 @@ form.form-modal {
 .outline-none {
     outline: none;
 }
+
+.btnModalEdit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inputCurrency {
+    outline: none;
+    width: 100%;
+    height: 42px;
+    padding: 5px 10px;
+    margin: 0px;
+    border: 1px solid #36363629;
+    font-family: 'poppins', sans-serif ;
+    background-color: #f3f7ffba;
+}
+
+.date-add {
+    background-color: #f3f7ffba;
+}
+
+.modalBodyView hr {
+    width: 100% !important;
+    margin-top: 2px !important;
+    margin-bottom: 5px !important;
+  }
+  
+  .modalBodyView span {
+    font-size: 18px;
+    font-family: 'poppins', sans-serif;
+    font-weight: 550;
+  }
+  
+  .modalBodyView label {
+    margin-bottom: 10px;
+  }
+
+  .modalPropertiesView {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 350px !important;
+  }

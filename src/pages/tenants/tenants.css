@@ -28,6 +28,38 @@
   background-color: #e9eaf3;
 }
 
+.formFilterTenants {
+  grid-column-gap: 10px;
+    -webkit-column-gap: 10px;
+    grid-column-gap: 10px;
+    column-gap: 10px;
+    grid-row-gap: 5px;
+    grid-row-gap: 5px;
+    row-gap: 5px;
+    /* margin-bottom: 80px; */
+    height: 100px;
+}
+
+.bodyFilter {
+  width: 100%;
+}
+
+.filterTenants {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.tenantsForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.inputFilterTenants input {
+  width: 300px;
+}
+
 Table {
   border: 1px solid;
   width: 100vh;
@@ -262,6 +294,8 @@ table {
   border-radius: 0px 10px 10px 0px;
 }
 
+/* Paginação */
+
 .paginationBttns {
   display: flex;
   justify-content: center;
@@ -308,6 +342,8 @@ table {
   border-radius: 100%;
 }
 
+/* Modais */
+
 .headerModalVisualizar {
   width: 100% !important;
 }
@@ -316,7 +352,7 @@ table {
   width: 100%;
 }
 
-.modalVisu {
+.modalHeader {
   width: 100% !important;
   display: flex;
   justify-content: space-between;
@@ -330,4 +366,31 @@ table {
   height: 22px;
   margin-top: -12px;
   margin-right: -12px;
+}
+
+.modalBodyView {
+  display: grid;
+}
+
+.ModalView {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 350px !important;
+}
+
+.modalBodyView hr {
+  width: 100% !important;
+  margin-top: 2px !important;
+  margin-bottom: 5px !important;
+}
+
+.modalBodyView span {
+  font-size: 18px;
+  font-family: 'poppins', sans-serif;
+  font-weight: 550;
+}
+
+.modalBodyView label {
+  margin-bottom: 10px;
 }

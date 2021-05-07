@@ -38,7 +38,7 @@ function Navbar(props) {
         <div className="container" id="nav-container">
           <nav className=" navbar-expand-lg navbar-dark menu-top">
             <div>
-              <h3>{props.title}</h3>
+              <h3 style={{marginBottom: 0}}>{props.title}</h3>
             </div>
             <div className="Avatars">
               <label className="avatar-label">Maria José</label>

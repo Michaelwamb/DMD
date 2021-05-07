@@ -1,0 +1,12 @@
+.Navbar-location {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 250px);
+  height: 80px;
+  float: right;
+}
+
+.main-location {
+    width: calc(100% - 250px);
+    float: right;
+}
