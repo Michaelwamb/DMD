@@ -10,8 +10,9 @@ import ReactPaginate from 'react-paginate';
 import Navbar from '../../components/Navbar';
 import variables from '../../variables';
 import Tenant from '../../components/Tenant';
+import { lower } from '../immobile/lower';
 
-function Location() {
+function Tenants() {
   const token = sessionStorage.getItem('@T_A');
 
   useEffect(() => {
@@ -21,7 +22,17 @@ function Location() {
   const [users, setUsers] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
 
-  const usersPerPage = 10;
+  const [tenantsNome, setTenantsNome] = useState('');
+  const [tenantsCelular, setTenantsCelular] = useState('');
+  const [tenantsEmail, setTenantsEmail] = useState('');
+
+  function searchChange(func) {
+    return e => {
+      func(e.target.value);
+    };
+  }
+
+  const usersPerPage = 5;
   const pagesVisited = pageNumber * usersPerPage;
 
   const getLocatarios = () => {
@@ -41,6 +52,12 @@ function Location() {
   const displayUsers = users
 
     .slice(pagesVisited, pagesVisited + usersPerPage)
+    .filter(
+      value =>
+        lower(value.nome).includes(lower(tenantsNome)) &&
+        lower(value.celular).includes(lower(tenantsCelular)) &&
+        lower(value.email).includes(lower(tenantsEmail))
+    )
     .map(Index => {
       return (
         <TenantsContext.Provider value={{ getLocatarios }}>
@@ -102,7 +119,7 @@ function Location() {
   };
 
   return (
-    <div>
+    <div style={{ width: '100%', height: '100%' }}>
       <Sidebar />
       <div className="Navbar-tenants">
         <Navbar title="Locatários" />
@@ -114,13 +131,13 @@ function Location() {
               <div className="filterTenants">
                 <form className="formFilterTenants tenantsForm">
                   <div className="inputFilterTenants filterName">
-                    <input />
+                    <input onChange={searchChange(setTenantsNome)} />
                   </div>
                   <div className="inputFilterTenants filterEmail">
-                    <input />
+                    <input onChange={searchChange(setTenantsCelular)} />
                   </div>
                   <div className="inputFilterTenants filterCelular">
-                    <input />
+                    <input onChange={searchChange(setTenantsEmail)} />
                   </div>
                 </form>
               </div>
@@ -266,4 +283,4 @@ function Location() {
   );
 }
 
-export default Location;
+export default Tenants;

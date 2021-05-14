@@ -152,7 +152,6 @@ Immobile {
     height: 100vh;
     align-items: center;
     /* max-width: 150vh; */
-    min-width: 150vh;
     height: 100%;
 }
 
@@ -654,12 +653,28 @@ form.form-modal {
   }
   
   .modalBodyView label {
-    margin-bottom: 10px;
+    margin-bottom: 20px !important;
+    word-break: break-all;
   }
 
   .modalPropertiesView {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    width: 350px !important;
+  }
+
+  .comodos1 {
+    display: flex;
+    justify-content: space-between;
+    white-space: normal;
+    margin-bottom: 15px;
+  }
+
+  .comodos2 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .comodosImmobile label {
+    font-size: 16px;
   }

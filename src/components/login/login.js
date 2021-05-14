@@ -1,45 +1,51 @@
-import React, { useState } from "react";
-import "./login.css";
-import Image from "../../assets/dmd_massa.png";
-import { MdEmail, MdLock } from "react-icons/md";
-import { HiEye, HiEyeOff } from "react-icons/hi";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import './login.css';
+import Image from '../../assets/dmd_massa.png';
+import { MdEmail, MdLock } from 'react-icons/md';
+import { HiEye, HiEyeOff } from 'react-icons/hi';
+import { useHistory } from 'react-router-dom';
+import FullPageLoader from '../Loading/FullPageLoader';
 
 const Login = () => {
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
   const history = useHistory();
+
+  const [loader, showLoader, hideLoader] = FullPageLoader();
 
   function handleSubmit(e) {
     e.preventDefault();
 
+    showLoader();
+
     const data = JSON.stringify({
       email: user,
-      password: password,
+      password: password
     });
 
-    fetch("http://192.168.1.109:3333/login", {
-      method: "POST",
+    fetch('http://192.168.1.109:3333/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      body: data,
+      body: data
     })
-      .then((response) => response.json())
-      .then((response) => {
+      .then(response => response.json())
+      .then(response => {
+        hideLoader();
         if (response.token) {
-          sessionStorage.setItem("@T_A", response.token);
-          history.push("/dash");
-        } else return alert("Falha na autenticação");
+          sessionStorage.setItem('@T_A', response.token);
+          history.push('/dash');
+        } else return alert('Falha na autenticação');
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   }
 
   const [show, setShow] = useState(false);
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.preventDefault();
     setShow(!show);
   };
@@ -54,6 +60,7 @@ const Login = () => {
           <div className="title-header">
             <h1>Login</h1>
           </div>
+
           <div className="body-login">
             <div className="login-loginInputEmail">
               <MdEmail />
@@ -63,7 +70,7 @@ const Login = () => {
                 type="user"
                 placeholder="Digite um email"
                 name="user"
-                onChange={(value) => setUser(value.target.value)}
+                onChange={value => setUser(value.target.value)}
               />
             </div>
             <div className="login-loginInputPassword">
@@ -72,8 +79,8 @@ const Login = () => {
               <input
                 placeholder="Digite sua senha"
                 name="password"
-                type={show ? "text" : "password"}
-                onChange={(value) => setPassword(value.target.value)}
+                type={show ? 'text' : 'password'}
+                onChange={value => setPassword(value.target.value)}
               />
               <div className="login-eye">
                 {show ? (
@@ -85,7 +92,7 @@ const Login = () => {
             </div>
 
             <button type="submit" onClick={handleSubmit}>
-              Entrar
+              <label style={{ marginBottom: 0 }}>Entrar {loader}</label>
             </button>
           </div>
         </div>

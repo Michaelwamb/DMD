@@ -2,7 +2,6 @@
     width: calc(100% - 250px);
     float: right;
     align-items: center;
-    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;

@@ -7,6 +7,7 @@ import * as IoIcons from 'react-icons/io';
 import Image from '../../assets/dmd_massa.png';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import variables from '../../variables';
+// import { format, parseISO } from 'data-fns';
 
 import Input from '../Input/index';
 import Select from '../Select/Select';
@@ -19,13 +20,13 @@ import { Form } from '@unform/web';
 
 export default function Imoveis({ imovel }) {
   const token = sessionStorage.getItem('@T_A');
-  const { getImoveis } = useContext(ImmobileContext);
+  const { getImoveis, tipoCompra, tipoImovel } = useContext(ImmobileContext);
 
   const [modalEditar, setModalEditar] = useState(false);
   const [modalExcluir, setModalExcluir] = useState(false);
   const [modalVisualizar, setModalVisualizar] = useState(false);
-  const [tipoImovel, setTipoImovel] = useState([]);
-  const [tipoCompra, setTipoCompra] = useState([]);
+  // const [tipoImovel, setTipoImovel] = useState([]);
+  // const [tipoCompra, setTipoCompra] = useState([]);
 
   const [immobileData, setImmobileData] = useState({
     descricao: imovel.descricao,
@@ -46,7 +47,8 @@ export default function Imoveis({ imovel }) {
     valor_imovel: imovel.valor_imovel,
     valoraluguel: imovel.valoraluguel,
     baixa_imovel: imovel.baixa_imovel,
-    data_compra: imovel.data_compra
+    data_compra: imovel.data_compra,
+    data_baixa: imovel.data_baixa
   });
 
   const selecionarImmobile = (elemento, caso) => {
@@ -55,7 +57,6 @@ export default function Imoveis({ imovel }) {
   };
 
   const handleChange = e => {
-    console.log(e, e);
     const { name, value } = e.target;
 
     setImmobileData(prevState => ({
@@ -77,7 +78,6 @@ export default function Imoveis({ imovel }) {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         setModalEditar(false);
         getImoveis();
       })
@@ -99,6 +99,7 @@ export default function Imoveis({ imovel }) {
     })
       .then(response => response.json())
       .then(response => {
+        setModalExcluir(false);
         getImoveis();
       })
       .catch(err => {
@@ -109,6 +110,9 @@ export default function Imoveis({ imovel }) {
   const abrirModalVisualizar = () => {
     setModalVisualizar(true);
   };
+
+  const date = new Date(Date.UTC(2020, 11, 20, 3, 23, 16, 738));
+  console.log(new Intl.DateTimeFormat('pt-BR').format(date));
 
   return (
     <>
@@ -246,7 +250,6 @@ export default function Imoveis({ imovel }) {
                 <label style={{ width: '30%' }}>
                   Quartos
                   <Input
-                    onkeypress="return filtroTeclas(event)"
                     style={{ outline: 'none' }}
                     width="100%"
                     height="42px"
@@ -425,7 +428,8 @@ export default function Imoveis({ imovel }) {
                     id="date"
                     type="date"
                     name="data_compra"
-                    defaultValue={imovel && imovel.data_compra}
+                    defaultValue="yyyy-MM-dd"
+                    Value={imovel && imovel.data_compra}
                     onChange={handleChange}
                     InputLabelProps={{
                       shrink: true
@@ -444,7 +448,8 @@ export default function Imoveis({ imovel }) {
                     variant="outlined"
                     id="date"
                     type="date"
-                    defaultValue="2017-05-24"
+                    defaultValue="yyyy-MM-dd"
+                    Value={imovel && imovel.data_compra}
                     InputLabelProps={{
                       shrink: true
                     }}
@@ -553,17 +558,49 @@ export default function Imoveis({ imovel }) {
             <hr></hr>
             <label>{imovel.estado}</label>
 
-            <span>Area:</span>
+            <span>Valor do Aluguel:</span>
             <hr></hr>
-            <label>{imovel.area_servico}</label>
+            <label>{imovel.valoraluguel}</label>
 
-            <span>Id:</span>
+            <span>Valor Compra:</span>
             <hr></hr>
-            <label>{imovel.id_tipocompra}</label>
+            <label>{imovel.valor_imovel}</label>
 
-            <span>id_tipoimovel:</span>
+            <span>Observações:</span>
             <hr></hr>
-            <label>{imovel.id_tipoimovel}</label>
+            <label>{imovel.observacoes}</label>
+
+            <span>Motivo da baixa:</span>
+            <hr></hr>
+            <label>{imovel.motivo_baixa}</label>
+
+            <span>Metros²</span>
+            <hr></hr>
+            <label>{imovel.metros}</label>
+            <span>Data da Compra</span>
+            <hr></hr>
+            <label>{imovel.data_compra}</label>
+
+            <span>Data da Venda</span>
+            <hr></hr>
+            <label>{imovel.data_baixa}</label>
+
+            <div className="comodosImmobile">
+              <div>
+                <span>Cômodos</span>
+                <hr></hr>
+              </div>
+              <div className="comodos1 ">
+                <label>Quartos: {imovel.quartos}</label>
+                <label>Suites: {imovel.suites}</label>
+                <label>Banheiros: {imovel.banheiros}</label>
+              </div>
+              <div className="comodos2">
+                <label>Aréa de Serviço: {imovel.area_servico}</label>
+                <label>Garagens: {imovel.garagem}</label>
+                <label>Sala de Estar: {imovel.sala_estar}</label>
+              </div>
+            </div>
           </div>
         </ModalBody>
       </Modal>

@@ -11,6 +11,7 @@
 .main-tenants {
   width: calc(100% - 250px);
   float: right;
+  height: 100%;
 }
 
 .Navbar-tenants {
@@ -46,7 +47,7 @@
 
 .filterTenants {
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
 }
 

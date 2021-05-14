@@ -17,6 +17,7 @@ import TextArea from '../../components/TextArea/TextArea';
 import CurrencyInput from '../../currency/CurrencyInput';
 
 import Imoveis from '../../components/Immobile/index';
+import { lower } from './lower';
 
 import { Form } from '@unform/web';
 import ImmobileContext from '../../contexts/ImmobileContext';
@@ -31,6 +32,22 @@ const Immobile = props => {
   const [modalAdd, setModalAdd] = useState(false);
   const [tipoImovel, setTipoImovel] = useState([]);
   const [tipoCompra, setTipoCompra] = useState([]);
+
+  const [immobileName, setImmobileName] = useState('');
+  const [immobileCidade, setImmobileCidade] = useState('');
+  const [immobileEstado, setImmobileEstado] = useState('');
+
+  function searchChange(func) {
+    return e => {
+      func(e.target.value);
+    };
+  }
+
+  let newDate = new Date();
+
+  //format according to the computer's default locale
+  Intl.DateTimeFormat().format(newDate);
+  console.log(newDate);
 
   const [immobile, setImmobile] = useState({
     descricao: '',
@@ -51,8 +68,16 @@ const Immobile = props => {
     valor_imovel: '',
     valoraluguel: '',
     baixa_imovel: '',
-    data_compra: ''
+    data_compra: '',
+    data_baixa: ''
   });
+
+  // acumulador é a variável que mantem o valor da soma dos seus items, que neste caso começa de 0 e a cada iteração é somado o valor o objeto atual
+  // const result = immobile.reduce(function (acumulador, objetoAtual) {
+  //   return acumulador + objetoAtual.valoraluguel;
+  // }, 0);
+
+  // console.log(result);
 
   useEffect(() => {
     getImoveis();
@@ -79,45 +104,10 @@ const Immobile = props => {
     })
       .then(response => response.json())
       .then(response => {
-        // console.log(response);
+        console.log(response);
         setUsers(response);
       })
       .catch(err => {});
-  };
-
-  const displayUsers = users
-    .slice(pagesVisited, pagesVisited + usersPerPage)
-    .map(index => {
-      return (
-        <ImmobileContext.Provider value={{ getImoveis }}>
-          <Imoveis imovel={index} />
-        </ImmobileContext.Provider>
-      );
-    });
-  const pageCount = Math.ceil(users.length / usersPerPage);
-
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
-
-  const Add = e => {
-    fetch(variables.api + '/imoveis', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify(immobile)
-    })
-      .then(response => response.json())
-      .then(response => {
-        // console.log(response);
-        setModalAdd(false);
-        getImoveis();
-      })
-      .catch(err => {
-        // console.log(err);
-      });
   };
 
   const getTipoImovel = () => {
@@ -146,6 +136,50 @@ const Immobile = props => {
         setTipoCompra(response);
       })
       .catch(err => {});
+  };
+
+  const displayUsers = users
+    .slice(pagesVisited, pagesVisited + usersPerPage)
+    .filter(
+      value =>
+        lower(value.descricao).includes(lower(immobileName)) &&
+        lower(value.cidade).includes(lower(immobileCidade)) &&
+        lower(value.estado).includes(lower(immobileEstado))
+    )
+    .map(index => {
+      return (
+        <ImmobileContext.Provider
+          key={Imoveis.id}
+          value={{ getImoveis, tipoCompra, tipoImovel }}
+        >
+          <Imoveis imovel={index} />
+        </ImmobileContext.Provider>
+      );
+    });
+  const pageCount = Math.ceil(users.length / usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
+  const Add = e => {
+    fetch(variables.api + '/imoveis', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(immobile)
+    })
+      .then(response => response.json())
+      .then(response => {
+        // console.log(response);
+        setModalAdd(false);
+        getImoveis();
+      })
+      .catch(err => {
+        // console.log(err);
+      });
   };
 
   // const filtroTeclas = function (event) {
@@ -181,6 +215,8 @@ const Immobile = props => {
               <div className="input-block">
                 <div className="input-search label-float">
                   <input
+                    value={immobileName}
+                    onChange={searchChange(setImmobileName)}
                     className="fa fa-search txtbusca outline-none"
                     placeholder="Nome do Imóvel"
                   ></input>
@@ -190,6 +226,8 @@ const Immobile = props => {
                 <input
                   placeholder="Cidade..."
                   className="outline-none txtbusca"
+                  value={immobileCidade}
+                  onChange={searchChange(setImmobileCidade)}
                 ></input>
               </div>
 
@@ -197,6 +235,8 @@ const Immobile = props => {
                 <input
                   className="txtbusca outline-none"
                   placeholder="Estado..."
+                  value={immobileEstado}
+                  onChange={searchChange(setImmobileEstado)}
                 />
               </div>
 
@@ -594,7 +634,7 @@ const Immobile = props => {
                         id="date"
                         type="date"
                         name="data_compra"
-                        defaultValue="2017-05-24"
+                        defaultValue="yyyy-MM-dd"
                         InputLabelProps={{
                           shrink: true
                         }}
@@ -618,10 +658,16 @@ const Immobile = props => {
                         variant="outlined"
                         id="date"
                         type="date"
-                        defaultValue="2017-05-24"
+                        defaultValue="dd/mm/yyyy"
                         InputLabelProps={{
                           shrink: true
                         }}
+                        onChange={value =>
+                          setImmobile({
+                            ...immobile,
+                            data_baixa: value.nativeEvent.target.value
+                          })
+                        }
                       />
                     </Grid>
                   </Grid>
